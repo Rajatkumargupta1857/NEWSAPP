@@ -7,7 +7,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 export class News extends Component {
   static defaultProps = {
     country: "in",
-    // pageSize: 8,
+     pageSize: 8,
     category: "general",
   };
   static propTypes = {
@@ -32,7 +32,7 @@ export class News extends Component {
   }
 
   async updateNews() {
-    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=d2c979b7dad0484aa558a69b0fce3793&page=${this.state.page}&pagesize=${this.props.pageSize}`;
+    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=be47eca73a724d32ad7e55770264cc6e&page=${this.state.page}&pagesize=${this.props.pageSize}`;
     this.setState({ loading: true });
     let data = await fetch(url);
     let parseData = await data.json();
@@ -62,7 +62,7 @@ export class News extends Component {
   };
   fetchMoreData = async() => {
     this.setState({page:this.state.page + 1});
-    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=d2c979b7dad0484aa558a69b0fce3793&page=${this.state.page}&pagesize=${this.props.pageSize}`;
+    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=be47eca73a724d32ad7e55770264cc6e&page=${this.state.page}&pagesize=${this.props.pageSize}`;
     this.setState({ loading: true });
     let data = await fetch(url);
     let parseData = await data.json();
@@ -80,19 +80,24 @@ export class News extends Component {
     return (
       <>
         <h1 className="text-center" style={{ margin: "35px 0px" }}>NewsMonkey -Top {this.capitalizeFirstLetter(this.props.category)} Headline</h1>
-{/* {this.state.loading && <Spinner />} */}
+{this.state.loading && <Spinner />}
 
 <InfiniteScroll
   dataLength={this.state.articles.length}
   next={this.fetchMoreData}
   hasMore={this.state.articles.length !== this.state.totalResults}
   loader={<Spinner />}
+  
+  
+  style={{ overflow:"overflow-hidden"}}
+  
 >
   <div className="container">
     <div className="row">
       {this.state.articles.map((element) => {
         return (
-          <div className="col-md-4" key={element.url}>
+          // key={Math.random()}
+          <div className="col-md-4 my-3" key={Math.random()}>
             <NewsItem
               title={element.title ? element.title : ""}
               discription={element.description ? element.description : ""}

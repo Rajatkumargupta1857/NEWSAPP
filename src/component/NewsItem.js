@@ -2,12 +2,12 @@ import React, { Component } from 'react'
 
 export class NewsItem extends Component {
     render() {
-    let {title, discription,imageUrl,newsUrl,author,date,source}=this.props;
+    let {title, discription,imageUrl,newsUrl,author,date,source,content}=this.props;
     return (
-      <div className='my-3 style={{overflow: hidden}}}'>
-            <div className="card" >
+      <div className="container ">
+            <div className="card " >
             <span className="position-absolute top-0  translate-middle badge rounded-pill bg-danger" style={{zIndex:1,left:"90%"}}>{source}</span>
-            <img src={!imageUrl?"https://c.biztoc.com/p/bfc41211bf9bd7f6/s.webp":imageUrl} className="card-img-top" alt="error" />
+            <img src={!imageUrl?"https://motor.ru/imgs/2023/09/24/08/6149699/448299eb855a31fb395b5ecda7a4d133d626edce.jpg":imageUrl} className="card-img-top" alt="error" />
             <div className="card-body">
                 <h5 className="card-title">{title}</h5>
                 <p className="card-text">{discription}...</p>
